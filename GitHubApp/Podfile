@@ -7,5 +7,6 @@ target 'GitHubApp' do
 
   # Pods for GitHubApp
   pod 'Moya'
+  pod 'Haneke'
 
 end
