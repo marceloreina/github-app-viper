@@ -6,16 +6,18 @@
 //  Copyright © 2017 Marcelo Reina. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol TopSwiftReposPresentation: class {
     func viewDidLoad()
+    func loadMoreRepos()
+    func reloadReposList()
+    func repoSelected(at index: Int)
 }
 
 protocol TopSwiftReposView: class {
     func showRepos(repos: [RepoDisplayData])
     func showNoContent()
-    var currentPage: Int {get}
 }
 
 protocol TopSwiftReposUseCase: class {
@@ -28,7 +30,11 @@ protocol TopSwiftReposInteractorOutput: class {
 }
 
 protocol TopSwiftReposWireframe: class {
+    weak var viewController: UIViewController? { get set }
     
+    func presentRepoPullRequests(for repo: Repo)
+    
+    static func createModule() -> UIViewController
 }
 
 struct RepoDisplayData {

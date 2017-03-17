@@ -13,28 +13,28 @@ class TopSwiftReposPresenter {
     var interactor: TopSwiftReposUseCase!
     var router: TopSwiftReposWireframe!
     
-    var repos: [Repo] = [] {
-        didSet {
-            if repos.count > 0 {
-                view?.showRepos(repos: repos.flatMap({ (repo) -> RepoDisplayData? in
-                    return RepoDisplayData(repoName: repo.name,
-                                                      repoDescription: repo.repoDescription,
-                                                      watchNumber: "\(repo.watchersCount)",
-                        forkNumber: "\(repo.forksCount)",
-                        starNumber: "\(repo.stargazersCount)",
-                        ownerName: repo.user.login,
-                        ownerProfileImageURL: URL(string: repo.user.avatarURL)!)
-                }))
-            } else {
-                view?.showNoContent()
-            }
-        }
-    }
+    static let initialPageNumber = 1
+    var currentPage = TopSwiftReposPresenter.initialPageNumber
+    var topSwiftRepos = [Repo]()
 }
 
 extension TopSwiftReposPresenter: TopSwiftReposInteractorOutput {
     func topSwiftReposFetched(repos: [Repo]) {
-        self.repos = repos
+        if repos.isEmpty && topSwiftRepos.isEmpty {
+            view!.showNoContent()
+        } else {
+            topSwiftRepos.append(contentsOf: repos)
+            view?.showRepos(repos: topSwiftRepos.flatMap({ (repo) -> RepoDisplayData? in
+                return RepoDisplayData(repoName: repo.name,
+                                       repoDescription: repo.repoDescription,
+                                       watchNumber: "\(repo.watchersCount)",
+                    forkNumber: "\(repo.forksCount)",
+                    starNumber: "\(repo.stargazersCount)",
+                    ownerName: repo.user.login,
+                    ownerProfileImageURL: URL(string: repo.user.avatarURL)!)
+            }))
+        }
+        
     }
     
     func failedToLoadRepos() {
@@ -44,6 +44,25 @@ extension TopSwiftReposPresenter: TopSwiftReposInteractorOutput {
 
 extension TopSwiftReposPresenter: TopSwiftReposPresentation {
     func viewDidLoad() {
-        interactor.fetchTopSwiftRepos(pageNumber: view.currentPage)
+        interactor.fetchTopSwiftRepos(pageNumber: currentPage)
+    }
+    
+    func loadMoreRepos() {
+        currentPage += 1
+        interactor.fetchTopSwiftRepos(pageNumber: currentPage)
+    }
+    
+    func reloadReposList() {
+        currentPage = TopSwiftReposPresenter.initialPageNumber
+        topSwiftRepos.removeAll()
+        interactor.fetchTopSwiftRepos(pageNumber: currentPage)
+    }
+    
+    func repoSelected(at index: Int) {
+        guard index >= 0 && !topSwiftRepos.isEmpty && index < topSwiftRepos.count else {
+            return
+        }
+        //print("PRESENT REPO: \(topSwiftRepos[index])")
+        router.presentRepoPullRequests(for: topSwiftRepos[index])
     }
 }

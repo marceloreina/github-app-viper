@@ -13,6 +13,8 @@ class TopSwiftReposViewController: UIViewController {
     var presenter: TopSwiftReposPresentation!
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noDataView: UIView!
+    weak var refreshControl: UIRefreshControl!
     
     var topSwiftRepoList: [RepoDisplayData]?
     
@@ -23,7 +25,7 @@ class TopSwiftReposViewController: UIViewController {
     }
     
     private func setupView() {
-        title = "Top Swift Repos"
+        title = "Swift Repos"
         
         //setup navigation bar
         navigationController!.navigationBar.isTranslucent = false
@@ -32,13 +34,21 @@ class TopSwiftReposViewController: UIViewController {
         
         //setup tableview
         tableView.dataSource = self
+        tableView.delegate = self
+        
+        //hide no data view
+        noDataView.isHidden = true
+        
+        //create refresh control
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(TopSwiftReposViewController.refreshAction(sender:)), for: .valueChanged)
+        tableView.addSubview(refresh)
         
     }
     
-    static func createFromStoryboard(name: String) -> TopSwiftReposViewController {
-        let storyboard = UIStoryboard(name: name, bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: String(describing: self))
-        return viewController as! TopSwiftReposViewController
+    @objc private func refreshAction(sender: UIRefreshControl) {
+        presenter.reloadReposList()
+        refreshControl = sender
     }
 }
 
@@ -61,17 +71,37 @@ extension TopSwiftReposViewController: UITableViewDataSource {
     }
 }
 
+extension TopSwiftReposViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.repoSelected(at: indexPath.row)
+    }
+}
+
+extension TopSwiftReposViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let scrollViewHeight = scrollView.frame.size.height
+        let scrollContentSizeHeight = scrollView.contentSize.height
+        let scrollOffset = scrollView.contentOffset.y
+        
+        if scrollOffset + scrollViewHeight == scrollContentSizeHeight
+        {
+            presenter.loadMoreRepos()
+        }
+    }
+}
+
 extension TopSwiftReposViewController: TopSwiftReposView {
     func showRepos(repos: [RepoDisplayData]) {
+        if let refresh = refreshControl {
+            refresh.endRefreshing()
+            refreshControl = nil
+        }
+        noDataView.isHidden = true
         topSwiftRepoList = repos
         tableView.reloadData()
     }
     
     func showNoContent() {
-        print("NO CONTENT TO SHOW")
-    }
-    
-    var currentPage: Int {
-        return 0
-    }
+        noDataView.isHidden = false
+    }    
 }
