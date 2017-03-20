@@ -10,3 +10,9 @@ target 'GitHubApp' do
   pod 'Haneke'
 
 end
+
+target 'GitHubAppTests' do
+  use_frameworks!
+  pod 'Moya'
+
+end

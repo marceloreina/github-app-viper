@@ -62,7 +62,6 @@ extension TopSwiftReposPresenter: TopSwiftReposPresentation {
         guard index >= 0 && !topSwiftRepos.isEmpty && index < topSwiftRepos.count else {
             return
         }
-        //print("PRESENT REPO: \(topSwiftRepos[index])")
         router.presentRepoPullRequests(for: topSwiftRepos[index])
     }
 }
