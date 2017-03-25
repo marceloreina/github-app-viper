@@ -43,7 +43,9 @@ extension TopSwiftReposPresenter: TopSwiftReposInteractorOutput {
 }
 
 extension TopSwiftReposPresenter: TopSwiftReposPresentation {
-    func viewDidLoad() {
+    func loadRepoList() {
+        currentPage = TopSwiftReposPresenter.initialPageNumber
+        topSwiftRepos.removeAll()
         interactor.fetchTopSwiftRepos(pageNumber: currentPage)
     }
     
@@ -51,13 +53,7 @@ extension TopSwiftReposPresenter: TopSwiftReposPresentation {
         currentPage += 1
         interactor.fetchTopSwiftRepos(pageNumber: currentPage)
     }
-    
-    func reloadReposList() {
-        currentPage = TopSwiftReposPresenter.initialPageNumber
-        topSwiftRepos.removeAll()
-        interactor.fetchTopSwiftRepos(pageNumber: currentPage)
-    }
-    
+        
     func repoSelected(at index: Int) {
         guard index >= 0 && !topSwiftRepos.isEmpty && index < topSwiftRepos.count else {
             return

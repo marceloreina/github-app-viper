@@ -12,7 +12,7 @@ enum TopSwiftReposState {
     case initializing
     case loadingRepos
     case loadingMoreRepos
-    case noContent
+    case presentingNoContent
     case presentingRepos
 }
 
@@ -23,6 +23,7 @@ class TopSwiftReposViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noDataView: UIView!
+    @IBOutlet weak var emptyStateView: UIImageView!
     weak var refreshControl: UIRefreshControl!
     
     var topSwiftRepoList: [RepoDisplayData]?
@@ -37,7 +38,7 @@ class TopSwiftReposViewController: UIViewController {
                 setupLoadingMoreReposState()
             case .loadingRepos:
                 setupLoadingReposState()
-            case .noContent:
+            case .presentingNoContent:
                 setupNoContentState()
             case .presentingRepos:
                 setupPresentingReposState()
@@ -67,19 +68,23 @@ class TopSwiftReposViewController: UIViewController {
         //hide no data view
         noDataView.isHidden = true
         
+        //hide table view
+        tableView.isHidden = true
+        
+        //show empty state
+        emptyStateView.isHidden = false
+        
         //create refresh control
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(TopSwiftReposViewController.refreshAction(sender:)), for: .valueChanged)
         tableView.addSubview(refresh)
         
+        //set next state
         currentState = .loadingRepos
     }
     
     private func setupLoadingReposState() {
-        if let refresh = refreshControl {
-            refresh.beginRefreshing()
-        }
-        presenter.viewDidLoad()
+        presenter.loadRepoList()
     }
     
     private func setupLoadingMoreReposState() {
@@ -92,19 +97,47 @@ class TopSwiftReposViewController: UIViewController {
     }
     
     private func setupNoContentState() {
+        
+        if !emptyStateView.isHidden {
+            dismissEmptyStateView(animated: true)
+        }
+        
+        emptyStateView.isHidden = true
+        tableView.isHidden = true
         noDataView.isHidden = false
+        
     }
     
     private func setupPresentingReposState() {
         if let refresh = refreshControl {
             refresh.endRefreshing()
         }
+        
+        if !emptyStateView.isHidden {
+            dismissEmptyStateView(animated: true)
+        }
+        
+        tableView.isHidden = false
         noDataView.isHidden = true
         tableView.reloadData()
     }
     
+    fileprivate func dismissEmptyStateView(animated: Bool) {
+        if (animated) {
+            UIView.animate(withDuration: 1.0, animations: {
+                self.emptyStateView.alpha = 0
+            }, completion: { (_) in
+                self.emptyStateView.isHidden = true
+                self.emptyStateView.alpha = 1
+            })
+        } else {
+            emptyStateView.isHidden = true
+            emptyStateView.alpha = 1
+        }
+    }
+    
     @objc private func refreshAction(sender: UIRefreshControl) {
-        presenter.reloadReposList()
+        presenter.loadRepoList()
         refreshControl = sender
     }
 }
@@ -198,6 +231,6 @@ extension TopSwiftReposViewController: TopSwiftReposView {
     }
     
     func showNoContent() {
-        currentState = .noContent
+        currentState = .presentingNoContent
     }    
 }

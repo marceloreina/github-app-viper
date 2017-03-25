@@ -9,9 +9,8 @@
 import UIKit
 
 protocol TopSwiftReposPresentation: class {
-    func viewDidLoad()
+    func loadRepoList()
     func loadMoreRepos()
-    func reloadReposList()
     func repoSelected(at index: Int)
 }
 
