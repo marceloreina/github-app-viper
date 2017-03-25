@@ -34,6 +34,7 @@ class RepoTableViewCell: UITableViewCell {
         forkNumber.text = data.forkNumber
         starNumber.text = data.starNumber
         ownerName.text  = data.ownerName
+        ownerProfileImage.image = UIImage(named: "icon")
         ownerProfileImage.hnk_setImage(from: data.ownerProfileImageURL)
     }
 
