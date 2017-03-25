@@ -10,6 +10,8 @@ import UIKit
 import Haneke
 
 class RepoTableViewCell: UITableViewCell {
+    
+    static let cellHeight: CGFloat = 174.0
 
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var repoDescription: UILabel!
@@ -18,6 +20,12 @@ class RepoTableViewCell: UITableViewCell {
     @IBOutlet weak var starNumber: UILabel!
     @IBOutlet weak var ownerName: UILabel!
     @IBOutlet weak var ownerProfileImage: UIImageView!
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        ownerProfileImage.clipsToBounds = true
+        ownerProfileImage.layer.cornerRadius = 15
+    }
     
     func setupCell(data: RepoDisplayData) {
         name.text = data.repoName
