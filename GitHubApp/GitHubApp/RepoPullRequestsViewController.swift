@@ -17,7 +17,7 @@ class RepoPullRequestsViewController: UIViewController {
 
         
         setupView()
-        presenter.viewDidLoad()
+        presenter.loadPullRequestsList()
     }
 
     private func setupView() {
@@ -27,7 +27,17 @@ class RepoPullRequestsViewController: UIViewController {
 }
 
 extension RepoPullRequestsViewController: RepoPullRequestsView {
-    func showRepoTitle(text: String) {
-        title = text
+    
+    func showRepoDetail(repo: RepoDisplayData) {
+        title = repo.repoName
     }
+    
+    func showPullRequests(_ pullRequests: [PullRequestDisplayData]) {
+        print("A VERDADEIRA FESTA: \(pullRequests)")
+    }
+    
+    func showNoContent() {
+        print("NADA A DECLARAR")
+    }
+        
 }

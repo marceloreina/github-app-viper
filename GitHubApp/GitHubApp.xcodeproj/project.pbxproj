@@ -11,7 +11,11 @@
 		2504140D1E7D6A1F00A77C2C /* GitHubParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F7EA581E6AFC7E008D928E /* GitHubParser.swift */; };
 		2504140E1E7D6A2C00A77C2C /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F7EA561E6AF2F0008D928E /* Repo.swift */; };
 		2504140F1E7D6A3000A77C2C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F7EA5A1E6F67FF008D928E /* User.swift */; };
+		2506D3781E89EC6D00653FC7 /* RepoDisplayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506D3771E89EC6D00653FC7 /* RepoDisplayData.swift */; };
+		2506D37E1E89EE7100653FC7 /* PullRequestDisplayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506D37D1E89EE7100653FC7 /* PullRequestDisplayData.swift */; };
+		2506D3811E89F56200653FC7 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506D3801E89F56200653FC7 /* DateExtensions.swift */; };
 		257ED2831E86CFEE00B47E22 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257ED2821E86CFEE00B47E22 /* LoadMoreTableViewCell.swift */; };
+		257ED2851E89DF1F00B47E22 /* PullRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257ED2841E89DF1F00B47E22 /* PullRequest.swift */; };
 		25C7A9381E68E900006E810C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C7A9371E68E900006E810C /* AppDelegate.swift */; };
 		25C7A93D1E68E900006E810C /* Wireframe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25C7A93B1E68E900006E810C /* Wireframe.storyboard */; };
 		25C7A93F1E68E900006E810C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25C7A93E1E68E900006E810C /* Assets.xcassets */; };
@@ -54,7 +58,11 @@
 		250414001E7C9F8A00A77C2C /* GitHubAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitHubAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		250414041E7C9F8B00A77C2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2504140B1E7D686700A77C2C /* GitHubParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubParserTests.swift; sourceTree = "<group>"; };
+		2506D3771E89EC6D00653FC7 /* RepoDisplayData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoDisplayData.swift; sourceTree = "<group>"; };
+		2506D37D1E89EE7100653FC7 /* PullRequestDisplayData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullRequestDisplayData.swift; sourceTree = "<group>"; };
+		2506D3801E89F56200653FC7 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		257ED2821E86CFEE00B47E22 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
+		257ED2841E89DF1F00B47E22 /* PullRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullRequest.swift; sourceTree = "<group>"; };
 		25C7A9341E68E900006E810C /* GitHubApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25C7A9371E68E900006E810C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25C7A93C1E68E900006E810C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Wireframe.storyboard; sourceTree = "<group>"; };
@@ -122,6 +130,49 @@
 			name = Network;
 			sourceTree = "<group>";
 		};
+		2506D3791E89EDED00653FC7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				25C7A95C1E68F07A006E810C /* TopSwiftReposViewController.swift */,
+				25F7EA5E1E6F75A3008D928E /* RepoTableViewCell.swift */,
+				257ED2821E86CFEE00B47E22 /* LoadMoreTableViewCell.swift */,
+				2506D3771E89EC6D00653FC7 /* RepoDisplayData.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		2506D37A1E89EDF500653FC7 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				25C7A9581E68F029006E810C /* TopSwiftReposInteractor.swift */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		2506D37B1E89EE0800653FC7 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				25C7A9561E68F01A006E810C /* TopSwiftReposPresenter.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		2506D37C1E89EE4300653FC7 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				25C7A95A1E68F036006E810C /* TopSwiftReposRouter.swift */,
+			);
+			name = Router;
+			sourceTree = "<group>";
+		};
+		2506D37F1E89F54900653FC7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2506D3801E89F56200653FC7 /* DateExtensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		25C7A92B1E68E900006E810C = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +196,7 @@
 		25C7A9361E68E900006E810C /* GitHubApp */ = {
 			isa = PBXGroup;
 			children = (
+				2506D37F1E89F54900653FC7 /* Extensions */,
 				25C7A94B1E68EB9B006E810C /* Application */,
 				25C7A94C1E68EBAD006E810C /* Resources */,
 				25C7A94D1E68EBDD006E810C /* Modules */,
@@ -165,8 +217,8 @@
 		25C7A94C1E68EBAD006E810C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				25C7A93B1E68E900006E810C /* Wireframe.storyboard */,
 				25C7A93E1E68E900006E810C /* Assets.xcassets */,
+				25C7A93B1E68E900006E810C /* Wireframe.storyboard */,
 				25C7A9401E68E900006E810C /* LaunchScreen.storyboard */,
 				25C7A9431E68E900006E810C /* Info.plist */,
 			);
@@ -196,12 +248,10 @@
 			isa = PBXGroup;
 			children = (
 				25C7A9541E68EF6F006E810C /* TopSwiftReposContract.swift */,
-				25C7A95A1E68F036006E810C /* TopSwiftReposRouter.swift */,
-				25C7A9581E68F029006E810C /* TopSwiftReposInteractor.swift */,
-				25C7A9561E68F01A006E810C /* TopSwiftReposPresenter.swift */,
-				25C7A95C1E68F07A006E810C /* TopSwiftReposViewController.swift */,
-				25F7EA5E1E6F75A3008D928E /* RepoTableViewCell.swift */,
-				257ED2821E86CFEE00B47E22 /* LoadMoreTableViewCell.swift */,
+				2506D3791E89EDED00653FC7 /* View */,
+				2506D37A1E89EDF500653FC7 /* Interactor */,
+				2506D37B1E89EE0800653FC7 /* Presenter */,
+				2506D37C1E89EE4300653FC7 /* Router */,
 			);
 			name = "Top Swift Repos";
 			sourceTree = "<group>";
@@ -221,6 +271,7 @@
 			children = (
 				25F7EA561E6AF2F0008D928E /* Repo.swift */,
 				25F7EA5A1E6F67FF008D928E /* User.swift */,
+				257ED2841E89DF1F00B47E22 /* PullRequest.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -233,6 +284,7 @@
 				25F7EA691E744AB2008D928E /* RepoPullRequestsInteractor.swift */,
 				25F7EA671E744A84008D928E /* RepoPullRequestsPresenter.swift */,
 				25F7EA611E744967008D928E /* RepoPullRequestsViewController.swift */,
+				2506D37D1E89EE7100653FC7 /* PullRequestDisplayData.swift */,
 			);
 			name = "Repo Pull Requests";
 			sourceTree = "<group>";
@@ -474,12 +526,15 @@
 				25F7EA5B1E6F67FF008D928E /* User.swift in Sources */,
 				25F7EA571E6AF2F0008D928E /* Repo.swift in Sources */,
 				25F7EA591E6AFC7E008D928E /* GitHubParser.swift in Sources */,
+				2506D37E1E89EE7100653FC7 /* PullRequestDisplayData.swift in Sources */,
 				25F7EA5F1E6F75A3008D928E /* RepoTableViewCell.swift in Sources */,
+				2506D3811E89F56200653FC7 /* DateExtensions.swift in Sources */,
 				25F7EA621E744967008D928E /* RepoPullRequestsViewController.swift in Sources */,
 				25F7EA541E6AF1FE008D928E /* GitHubService.swift in Sources */,
 				25C7A95B1E68F036006E810C /* TopSwiftReposRouter.swift in Sources */,
 				25F7EA641E744995008D928E /* RepoPullRequestsRouter.swift in Sources */,
 				25F7EA521E6AEDE2008D928E /* GitHubAPI.swift in Sources */,
+				257ED2851E89DF1F00B47E22 /* PullRequest.swift in Sources */,
 				25C7A9591E68F029006E810C /* TopSwiftReposInteractor.swift in Sources */,
 				25C7A9521E68EC55006E810C /* RootRouter.swift in Sources */,
 				25F7EA6A1E744AB2008D928E /* RepoPullRequestsInteractor.swift in Sources */,
@@ -488,6 +543,7 @@
 				25C7A95D1E68F07A006E810C /* TopSwiftReposViewController.swift in Sources */,
 				25F7EA681E744A84008D928E /* RepoPullRequestsPresenter.swift in Sources */,
 				25C7A9501E68EC30006E810C /* RootContract.swift in Sources */,
+				2506D3781E89EC6D00653FC7 /* RepoDisplayData.swift in Sources */,
 				25F7EA661E7449EE008D928E /* RepoPullRequestsContract.swift in Sources */,
 				25C7A9571E68F01A006E810C /* TopSwiftReposPresenter.swift in Sources */,
 				25C7A9381E68E900006E810C /* AppDelegate.swift in Sources */,

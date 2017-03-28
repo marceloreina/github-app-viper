@@ -35,13 +35,3 @@ protocol TopSwiftReposWireframe: class {
     
     static func createModule() -> UIViewController
 }
-
-struct RepoDisplayData {
-    let repoName: String
-    let repoDescription: String
-    let watchNumber: String
-    let forkNumber: String
-    let starNumber: String
-    let ownerName: String
-    let ownerProfileImageURL: URL
-}

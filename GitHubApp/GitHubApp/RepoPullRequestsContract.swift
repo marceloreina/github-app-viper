@@ -9,22 +9,26 @@
 import UIKit
 
 protocol RepoPullRequestsPresentation: class {
-    func viewDidLoad()
+    func loadPullRequestsList()
 }
 
 protocol RepoPullRequestsView: class {
-    func showRepoTitle(text: String)
+    func showRepoDetail(repo: RepoDisplayData)
+    func showPullRequests(_ pullRequest: [PullRequestDisplayData])
+    func showNoContent()
 }
 
 protocol RepoPullRequestsUseCase: class {
-    
+    func listPullRequests(for repo: Repo)
 }
 
 protocol RepoPullRequestsInteractorOutput: class {
-    
+    func pullRequestsListed(pullRequests: [PullRequest])
+    func failedToListPullRequests()
 }
 
 protocol RepoPullRequestsWireframe: class {
     weak var viewController: UIViewController? { get set }
     static func createModule(for repo: Repo) -> UIViewController
 }
+

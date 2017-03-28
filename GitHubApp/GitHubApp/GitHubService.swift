@@ -29,15 +29,21 @@ enum GitHubAPIResult<T> {
 /// Alias for repositories search completion handler
 typealias RepoSearchCompletion = (GitHubAPIResult<[Repo]>) -> Void
 
+/// Alias for repositories search completion handler
+typealias ListPullRequestsCompletion = (GitHubAPIResult<[PullRequest]>) -> Void
+
+
 class GitHubService {
     
-    /// <#Description#>
+    /// Search Git Hub repos for a desired programming language and order the results based 
+    ///  on the `sortedBy` attribute. This request is paginated. For more details on
+    ///  attribute values please check Git Hub API doucmentation
     ///
     /// - Parameters:
-    ///   - languageName: <#languageName description#>
-    ///   - sortedBy: <#sortedBy description#>
-    ///   - pageNumber: <#pageNumber description#>
-    ///   - completion: <#completion description#>
+    ///   - languageName: programming language to be searched
+    ///   - sortedBy: attribute name used to sort the results
+    ///   - pageNumber: number of the page that should be fetched (beginning in 1)
+    ///   - completion: handler that receives `GitHubAPIResult` as parameter
     static func repoSearch(languageName: String, sortedBy: String, pageNumber: Int, completion: @escaping RepoSearchCompletion) {
         let provider = MoyaProvider<GitHubAPI>()
         provider.request(
@@ -76,6 +82,43 @@ class GitHubService {
                 
                 case .failure(_):
                     completion(.failure(error: .invalidResponse))
+            }
+        }
+    }
+    
+    static func listPullRequests(ownerLogin: String, repoName: String, state: String, sortedBy: String, completion: @escaping ListPullRequestsCompletion) {
+        let provider = MoyaProvider<GitHubAPI>()
+        provider.request(.listPullRequests(
+            ownerLogin: ownerLogin,
+            repoName: repoName,
+            stateAttribute: state,
+            sortAttribute: sortedBy
+            )
+        ) { (result) in
+            switch result {
+            case let .success(moyaResponse):
+                
+                // Check for invalid status code
+                let statusCode = moyaResponse.statusCode
+                guard statusCode == 200 else {
+                    completion(.failure(error: .httpError(httpCode: statusCode)))
+                    return
+                }
+                
+                // Check response data
+                let data = moyaResponse.data
+                let jsonArray = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String: Any]]
+                guard jsonArray != nil else {
+                    completion(.failure(error: .invalidObjectMapping))
+                    return
+                }
+                
+                // Mapping JSON -> Object
+                let pullRequests = GitHubParser.makePullRequests(jsonArray: jsonArray!)
+                completion(.success(object: pullRequests))
+                
+            case .failure(_):
+                completion(.failure(error: .invalidResponse))
             }
         }
     }

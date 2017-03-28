@@ -18,9 +18,10 @@ class RepoPullRequestsPresenter {
 
 extension RepoPullRequestsPresenter: RepoPullRequestsPresentation {
     
-    func viewDidLoad() {
+    func loadPullRequestsList() {
         if repo != nil {
-            view.showRepoTitle(text: repo.name)
+            view.showRepoDetail(repo: RepoDisplayData(from: repo))
+            interactor.listPullRequests(for: repo)
         } else {
             print("failed to receive repo")
         }
@@ -28,5 +29,14 @@ extension RepoPullRequestsPresenter: RepoPullRequestsPresentation {
 }
 
 extension RepoPullRequestsPresenter: RepoPullRequestsInteractorOutput {
+    func pullRequestsListed(pullRequests: [PullRequest]) {
+        let pullRequestsDisplayData = pullRequests.map { (pullRequest) -> PullRequestDisplayData in
+            return PullRequestDisplayData(from: pullRequest)
+        }
+        view.showPullRequests(pullRequestsDisplayData)
+    }
     
+    func failedToListPullRequests() {
+        view.showNoContent()
+    }
 }

@@ -14,6 +14,7 @@ import Moya
 enum GitHubAPI {
     /// - searchRepositories: fetch repositories from specific `languageName`, sorted by `sortAttribute`. The response is paginated and this control is provided by `pageNumber`
     case searchRepositories(languageName: String, sortAttribute: String, pageNumber: Int)
+    case listPullRequests(ownerLogin: String, repoName: String, stateAttribute: String, sortAttribute: String)
 }
 
 
@@ -30,6 +31,8 @@ extension GitHubAPI: TargetType {
         switch self {
         case .searchRepositories(_, _, _):
             return "/search/repositories"
+        case .listPullRequests(let ownerLogin, let repoName, _, _):
+            return "/repos/\(ownerLogin)/\(repoName)/pulls"
         }
     }
     
@@ -38,6 +41,8 @@ extension GitHubAPI: TargetType {
         switch self {
         case .searchRepositories(let language, let sortType, let pageNumber):
             return ["q": "language:\(language)", "sort": sortType, "page": pageNumber]
+        case .listPullRequests(_, _, let stateAttribute, let sortAttribute):
+            return ["state": stateAttribute, "sort": sortAttribute, "direction": "desc"]
         }
     }
         

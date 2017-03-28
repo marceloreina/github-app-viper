@@ -25,13 +25,7 @@ extension TopSwiftReposPresenter: TopSwiftReposInteractorOutput {
         } else {
             topSwiftRepos.append(contentsOf: repos)
             view?.showRepos(repos: topSwiftRepos.flatMap({ (repo) -> RepoDisplayData? in
-                return RepoDisplayData(repoName: repo.name,
-                                       repoDescription: repo.repoDescription,
-                                       watchNumber: "\(repo.watchersCount)",
-                    forkNumber: "\(repo.forksCount)",
-                    starNumber: "\(repo.stargazersCount)",
-                    ownerName: repo.user.login,
-                    ownerProfileImageURL: URL(string: repo.user.avatarURL)!)
+                return RepoDisplayData(from: repo)
             }))
         }
         
