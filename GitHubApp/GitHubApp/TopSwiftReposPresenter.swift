@@ -13,13 +13,13 @@ class TopSwiftReposPresenter {
     var interactor: TopSwiftReposUseCase!
     var router: TopSwiftReposWireframe!
     
-    static let initialPageNumber = 1
-    var currentPage = TopSwiftReposPresenter.initialPageNumber
-    var topSwiftRepos = [Repo]()
+    fileprivate static let initialPageNumber = 1
+    fileprivate var currentPage = TopSwiftReposPresenter.initialPageNumber
+    fileprivate var topSwiftRepos = [Repo]()
 }
 
 extension TopSwiftReposPresenter: TopSwiftReposInteractorOutput {
-    func topSwiftReposFetched(repos: [Repo]) {
+    internal func topSwiftReposFetched(repos: [Repo]) {
         if repos.isEmpty && topSwiftRepos.isEmpty {
             view!.showNoContent()
         } else {
@@ -31,24 +31,24 @@ extension TopSwiftReposPresenter: TopSwiftReposInteractorOutput {
         
     }
     
-    func failedToLoadRepos() {
+    internal func failedToLoadRepos() {
         view.showNoContent()
     }
 }
 
 extension TopSwiftReposPresenter: TopSwiftReposPresentation {
-    func loadRepoList() {
+    internal func loadRepoList() {
         currentPage = TopSwiftReposPresenter.initialPageNumber
         topSwiftRepos.removeAll()
         interactor.fetchTopSwiftRepos(pageNumber: currentPage)
     }
     
-    func loadMoreRepos() {
+    internal func loadMoreRepos() {
         currentPage += 1
         interactor.fetchTopSwiftRepos(pageNumber: currentPage)
     }
         
-    func repoSelected(at index: Int) {
+    internal func repoSelected(at index: Int) {
         guard index >= 0 && !topSwiftRepos.isEmpty && index < topSwiftRepos.count else {
             return
         }

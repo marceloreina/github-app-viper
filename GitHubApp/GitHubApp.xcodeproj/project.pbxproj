@@ -8,12 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2504140C1E7D686700A77C2C /* GitHubParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2504140B1E7D686700A77C2C /* GitHubParserTests.swift */; };
-		2504140D1E7D6A1F00A77C2C /* GitHubParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F7EA581E6AFC7E008D928E /* GitHubParser.swift */; };
-		2504140E1E7D6A2C00A77C2C /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F7EA561E6AF2F0008D928E /* Repo.swift */; };
-		2504140F1E7D6A3000A77C2C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F7EA5A1E6F67FF008D928E /* User.swift */; };
 		2506D3781E89EC6D00653FC7 /* RepoDisplayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506D3771E89EC6D00653FC7 /* RepoDisplayData.swift */; };
 		2506D37E1E89EE7100653FC7 /* PullRequestDisplayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506D37D1E89EE7100653FC7 /* PullRequestDisplayData.swift */; };
 		2506D3811E89F56200653FC7 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506D3801E89F56200653FC7 /* DateExtensions.swift */; };
+		25702D1A1E8B36B5006D1AF5 /* TSRPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25702D191E8B36B5006D1AF5 /* TSRPresenterTests.swift */; };
 		257ED2831E86CFEE00B47E22 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257ED2821E86CFEE00B47E22 /* LoadMoreTableViewCell.swift */; };
 		257ED2851E89DF1F00B47E22 /* PullRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257ED2841E89DF1F00B47E22 /* PullRequest.swift */; };
 		25C7A9381E68E900006E810C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C7A9371E68E900006E810C /* AppDelegate.swift */; };
@@ -61,6 +59,7 @@
 		2506D3771E89EC6D00653FC7 /* RepoDisplayData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoDisplayData.swift; sourceTree = "<group>"; };
 		2506D37D1E89EE7100653FC7 /* PullRequestDisplayData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullRequestDisplayData.swift; sourceTree = "<group>"; };
 		2506D3801E89F56200653FC7 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		25702D191E8B36B5006D1AF5 /* TSRPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSRPresenterTests.swift; sourceTree = "<group>"; };
 		257ED2821E86CFEE00B47E22 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		257ED2841E89DF1F00B47E22 /* PullRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullRequest.swift; sourceTree = "<group>"; };
 		25C7A9341E68E900006E810C /* GitHubApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +115,7 @@
 		250414011E7C9F8B00A77C2C /* GitHubAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				25702D171E8B368B006D1AF5 /* Modules */,
 				2504140A1E7D67F400A77C2C /* Network */,
 				250414041E7C9F8B00A77C2C /* Info.plist */,
 			);
@@ -171,6 +171,22 @@
 				2506D3801E89F56200653FC7 /* DateExtensions.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		25702D171E8B368B006D1AF5 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				25702D181E8B3694006D1AF5 /* Top Swift Repos */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		25702D181E8B3694006D1AF5 /* Top Swift Repos */ = {
+			isa = PBXGroup;
+			children = (
+				25702D191E8B36B5006D1AF5 /* TSRPresenterTests.swift */,
+			);
+			name = "Top Swift Repos";
 			sourceTree = "<group>";
 		};
 		25C7A92B1E68E900006E810C = {
@@ -360,7 +376,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Marcelo Reina";
 				TargetAttributes = {
 					250413FF1E7C9F8A00A77C2C = {
@@ -512,10 +528,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2504140D1E7D6A1F00A77C2C /* GitHubParser.swift in Sources */,
+				25702D1A1E8B36B5006D1AF5 /* TSRPresenterTests.swift in Sources */,
 				2504140C1E7D686700A77C2C /* GitHubParserTests.swift in Sources */,
-				2504140F1E7D6A3000A77C2C /* User.swift in Sources */,
-				2504140E1E7D6A2C00A77C2C /* Repo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +598,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B66182EEB69B1F01EA16FE3D /* Pods-GitHubAppTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = GitHubAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -598,6 +613,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5BF8F449AB13D55A825393B6 /* Pods-GitHubAppTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = GitHubAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -703,6 +719,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0655C81F9F33A59C403C73D9 /* Pods-GitHubApp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5Z8RWRLWK3;
 				INFOPLIST_FILE = GitHubApp/Info.plist;
@@ -717,6 +734,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DE5ED16B0578FBD22524130A /* Pods-GitHubApp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5Z8RWRLWK3;
 				INFOPLIST_FILE = GitHubApp/Info.plist;
