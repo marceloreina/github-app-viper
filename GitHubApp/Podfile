@@ -6,13 +6,13 @@ target 'GitHubApp' do
   use_frameworks!
 
   # Pods for GitHubApp
-  pod 'Moya'
+  pod 'Moya', '~> 8.0.3'
   pod 'Haneke'
 
 end
 
 target 'GitHubAppTests' do
   use_frameworks!
-  pod 'Moya'
+  pod 'Moya', '~> 8.0.3'
 
 end
