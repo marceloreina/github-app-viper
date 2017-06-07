@@ -59,7 +59,7 @@ class TopSwiftReposViewController: UIViewController {
         //setup navigation bar
         navigationController!.navigationBar.isTranslucent = false
         navigationController!.navigationBar.barTintColor = UIColor(colorLiteralRed: 27/255.0, green: 31/255.0, blue: 35/255.0, alpha: 1)
-        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(colorLiteralRed: 188/255.0, green: 189/255.0, blue: 192/255.0, alpha: 1)]
+        navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor(colorLiteralRed: 188/255.0, green: 189/255.0, blue: 192/255.0, alpha: 1)]
         
         //setup tableview
         tableView.dataSource = self
